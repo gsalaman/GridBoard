@@ -225,15 +225,15 @@ from PIL import Image, ImageDraw, ImageFont
 
 
 # Size of one panel
-matrix_rows = 64
-matrix_columns = 64
+matrix_rows = 32 
+matrix_columns = 32 
 
 # How many mattixes stacked horizontally and vertically
-matrix_horizontal = 1
-matrix_vertical = 1
+matrix_horizontal = 8
+matrix_vertical = 2
 
-total_rows = matrix_rows * matrix_horizontal
-total_columns = matrix_columns * matrix_vertical
+total_rows = 128 
+total_columns = 128 
 
 options = RGBMatrixOptions()
 options.rows = matrix_rows
@@ -242,17 +242,18 @@ options.chain_length = matrix_horizontal
 options.parallel = matrix_vertical
 options.hardware_mapping = 'regular'
 options.gpio_slowdown = 2
+options.pixel_mapper_config = 'U-mapper'
 
 matrix = RGBMatrix(options = options)
 
 # Putting hte images in
-background = Image.open("../ii21_icons/Tic-Tac-Toe/Gameboard_TTT.png").convert("RGB")
+background = Image.open("TTT/Gameboard_TTT.png").convert("RGB")
 background = background.resize((total_rows,total_columns))
 
-imageX = Image.open("../ii21_icons/Tic-Tac-Toe/X_TTT.png").convert("RGB")
+imageX = Image.open("TTT/X_TTT.png").convert("RGB")
 imageX = imageX.resize((16,16))
 
-imageO = Image.open("../ii21_icons/Tic-Tac-Toe/O_TTT.png").convert("RGB")
+imageO = Image.open("TTT/O_TTT.png").convert("RGB")
 imageO = imageO.resize((16,16))
 
 matrix.SetImage(background,0,0)
