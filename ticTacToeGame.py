@@ -1,5 +1,14 @@
 #setting up global variables
 
+# Making matrix locations
+
+matXPos = [0, 15, 31,
+	   0, 15, 31,
+	   0, 15, 31]
+
+matYPos = [0, 0, 0,
+	  15, 15, 15,
+	  31, 31, 31]
 # Will hold our game board data 
 tttBoard = ["-", "-", "-",
             "-", "-", "-",
@@ -49,18 +58,21 @@ def displayBoard():
 
 # Handle a turn for an arbitrary player
 def handleTurn(player):
-
+  global imageX
+  global imageO
+  global matrix
   # Get position from player
   print(player + "'s turn.")
   position = input("Choose a position from 1-9: ")
+  print(position)
 
   # Whatever the user inputs, make sure it is a valid input, and the spot is open
   valid = False
   while not valid:
 
     # Make sure the input is valid
-    while position not in ["1", "2", "3", "4", "5", "6", "7", "8", "9"]:
-      position = input("Choose a position from 1-9: ")
+    while position not in [1, 2, 3, 4, 5, 6, 7, 8, 9]:
+      position = input("Nope.  Choose a position from 1-9: ")
  
     # Get correct index in our board list
     position = int(position) - 1
@@ -71,8 +83,19 @@ def handleTurn(player):
     else:
       print("You can't go there. Go again.")
 
+  # Glenn's alt
+  if player == 'O':
+      temp_image = imageO
+  elif player == 'X':
+      temp_image = imageX
+  matrix.SetImage(temp_image, matXPos[position], matYPos[position])
+
+
+
+
   # Put the game piece on the board
   tttBoard[position] = player
+
 
   # Show the game board
   displayBoard()
@@ -189,6 +212,50 @@ def flipPlayer():
   elif currentPlayer == "O":
     currentPlayer = "X"
 
+
+from time import sleep
+import datetime
+
+import random
+
+# Graphics imports, constants and structures
+from rgbmatrix import RGBMatrix, RGBMatrixOptions 
+from PIL import Image, ImageDraw, ImageFont
+
+
+
+# Size of one panel
+matrix_rows = 64
+matrix_columns = 64
+
+# How many mattixes stacked horizontally and vertically
+matrix_horizontal = 1
+matrix_vertical = 1
+
+total_rows = matrix_rows * matrix_horizontal
+total_columns = matrix_columns * matrix_vertical
+
+options = RGBMatrixOptions()
+options.rows = matrix_rows
+options.cols = matrix_columns
+options.chain_length = matrix_horizontal
+options.parallel = matrix_vertical
+options.hardware_mapping = 'regular'
+options.gpio_slowdown = 2
+
+matrix = RGBMatrix(options = options)
+
+# Putting hte images in
+background = Image.open("../ii21_icons/Tic-Tac-Toe/Gameboard_TTT.png").convert("RGB")
+background = background.resize((total_rows,total_columns))
+
+imageX = Image.open("../ii21_icons/Tic-Tac-Toe/X_TTT.png").convert("RGB")
+imageX = imageX.resize((16,16))
+
+imageO = Image.open("../ii21_icons/Tic-Tac-Toe/O_TTT.png").convert("RGB")
+imageO = imageO.resize((16,16))
+
+matrix.SetImage(background,0,0)
 
 
 playGame()
