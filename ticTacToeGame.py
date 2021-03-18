@@ -2,13 +2,13 @@
 
 # Making matrix locations
 
-matXPos = [0, 15, 31,
-	   0, 15, 31,
-	   0, 15, 31]
+matXPos = [8, 40, 72,
+	   8, 40, 72,
+	   8, 40, 72]
 
-matYPos = [0, 0, 0,
-	  15, 15, 15,
-	  31, 31, 31]
+matYPos = [8, 8, 8,
+	  40, 40, 40,
+	  72, 72, 72]
 # Will hold our game board data 
 tttBoard = ["-", "-", "-",
             "-", "-", "-",
@@ -40,12 +40,14 @@ def playGame():
 
     # Flip to the other player
     flipPlayer()
-  
+
+def showWinner():  
   # Since the game is over, print the winner or tie
   if winner == "X" or winner == "O":
     print(winner + " won.")
   elif winner == None:
     print("Tie.")
+
 
 
 # Display the game board to the screen
@@ -124,6 +126,12 @@ def checkWinner():
     winner = diagonalWinner
   else:
     winner = None
+
+#  if winner == 'X':
+#    winningLetter = winnerO
+#  elif winner == 'O':
+#    winnerX
+#  matrix.SetImage(winningLetter,0,0)
 
 
 # Check the rows for a win
@@ -246,7 +254,7 @@ options.pixel_mapper_config = 'U-mapper'
 
 matrix = RGBMatrix(options = options)
 
-# Putting hte images in
+# Putting the images in
 background = Image.open("TTT/Gameboard_TTT.png").convert("RGB")
 background = background.resize((total_rows,total_columns))
 
@@ -256,7 +264,17 @@ imageX = imageX.resize((16,16))
 imageO = Image.open("TTT/O_TTT.png").convert("RGB")
 imageO = imageO.resize((16,16))
 
+winnerO = Image.open ("TTT/Owins_TTT.gif").convert("RGB")
+winnerO = winnerO.resize((total_rows,total_columns))
+
+winnerX = Image.open("TTT/Xwins_TTT.gif").convert("RGB")
+winnerX = winnerX.resize((total_rows,total_columns))
+
 matrix.SetImage(background,0,0)
 
+while True:
+  playGame()
+ 
+  showWinner()
 
-playGame()
+  sleep(5)
