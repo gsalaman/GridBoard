@@ -9,20 +9,16 @@ byte cols[] = {22,23,24};
 const int colCount = sizeof(cols)/sizeof(cols[0]);
  
 byte keys[colCount][rowCount];
-byte lastKeys[colCount][rowCount] = {0};
- 
+byte lastKeys[colCount][rowCount];
+
 void setup() {
     Serial.begin(9600);
- 
-    for(int x=0; x<rowCount; x++) {
-        Serial.print(rows[x]); Serial.println(" as input");
-        pinMode(rows[x], INPUT);
+
+    for (int colIndex=0; colIndex < colCount; colIndex++) { //fills with unpressed as inital state
+      for (int rowIndex=0; rowIndex < rowCount; rowIndex++) {
+        lastKeys[colIndex][rowIndex] = 1;
     }
- 
-    for (int x=0; x<colCount; x++) {
-        Serial.print(cols[x]); Serial.println(" as input-pullup");
-        pinMode(cols[x], INPUT_PULLUP);
-    }
+  }
 }
  
 void readMatrix() {
@@ -37,6 +33,7 @@ void readMatrix() {
         for (int rowIndex=0; rowIndex < rowCount; rowIndex++) {
             byte rowCol = rows[rowIndex];
             pinMode(rowCol, INPUT_PULLUP);
+            delay(1);
             keys[colIndex][rowIndex] = digitalRead(rowCol);
             pinMode(rowCol, INPUT);
         }
@@ -61,12 +58,15 @@ void printMatrix() {
               Serial.println(StrVal); //adds new line so if multiple buttons are pressed, it still works.
             }
             else if (keys[colIndex][rowIndex] == 0 && lastKeys[colIndex][rowIndex] == 0) {
-              break;
+              
+            }
+            else if (keys[colIndex][rowIndex] == 1 && lastKeys[colIndex][rowIndex] == 1) {
+              
             }
             else if (keys[colIndex][rowIndex] == 1 && lastKeys[colIndex][rowIndex] == 0) {
               String StrVal = "R" + String(colIndex) + "," + String(rowIndex); //concatonate coordinate of button press
               Serial.println(StrVal); //adds new line so if multiple buttons are pressed, it still works.
-            }    
+            }   
         }   
     }
     storeLastMatrix(); //stores before read for state machine
