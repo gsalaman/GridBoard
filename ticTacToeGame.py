@@ -29,6 +29,10 @@ def playGame():
 
   displayBoard()
 
+  if currentPlayer == 'O':
+    matrix.SetImage(imageO,99,110)
+  elif currentPlayer == 'X':
+    matrix.SetImage(imageX,99,110)
   # Main game loop
   while gameStillGoing:
 
@@ -217,8 +221,10 @@ def flipPlayer():
   global currentPlayer
   if currentPlayer == "X":
     currentPlayer = "O"
+    matrix.SetImage(imageO,99,110)
   elif currentPlayer == "O":
     currentPlayer = "X"
+    matrix.SetImage(imageX,99,110)
 
 
 from time import sleep
@@ -264,17 +270,33 @@ imageX = imageX.resize((16,16))
 imageO = Image.open("TTT/O_TTT.png").convert("RGB")
 imageO = imageO.resize((16,16))
 
-winnerO = Image.open ("TTT/Owins_TTT.gif").convert("RGB")
-winnerO = winnerO.resize((total_rows,total_columns))
+#winnerOOne = Image.open("TTT/Owins_TTT.gif01.gif").convert("RGB")
+#winnerOOne = winnerOOne.resize((total_rows,total_columns))
 
-winnerX = Image.open("TTT/Xwins_TTT.gif").convert("RGB")
-winnerX = winnerX.resize((total_rows,total_columns))
+#winnerOTwo = Image.open("TTT/OWins_TTT.gif02.gif").convert("RGB")
+#winnerOTwo = winnerOTwo.resize((total_rows,total_columns))
+
+#winnerOThree = Image.open("TTT/OWins_TTT.gif03.gif").convert("RGB")
+#winnerOThree = winnerOThree.resize((total_rows,total_columns).convert("RGB")
+
+
+#winnerXOne = Image.open("TTT/Xwins_TTT.gif01.gif").convert("RGB")
+#winnerXOne = winnerXOne.resize((total_rows,total_columns))
 
 matrix.SetImage(background,0,0)
 
 while True:
   playGame()
- 
+
   showWinner()
 
   sleep(5)
+
+  gameStillGoing = True
+  winner = None
+
+  tttBoard =["-","-","-",
+             "-","-","-",
+             "-","-","-"]
+
+  matrix.SetImage(background,0,0)

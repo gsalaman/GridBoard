@@ -1,6 +1,20 @@
 import serial
 import time
 
+###########
+# Block until button is actually pressed.
+############
+def read_block():
+  current_press = read()
+  while current_press == None:
+    time.sleep(0.01)
+    current_press = read()
+  return current_press
+
+
+##############
+# read
+#############
 def read():
   global ser
 
