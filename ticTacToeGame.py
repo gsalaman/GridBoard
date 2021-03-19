@@ -270,18 +270,51 @@ imageX = imageX.resize((16,16))
 imageO = Image.open("TTT/O_TTT.png").convert("RGB")
 imageO = imageO.resize((16,16))
 
-#winnerOOne = Image.open("TTT/Owins_TTT.gif01.gif").convert("RGB")
-#winnerOOne = winnerOOne.resize((total_rows,total_columns))
+oWinScreen1 = Image.open("TTT/Owins_TTT.gif01.gif").convert("RGB")
+oWinScreen1 = oWinScreen1.resize((total_rows,total_columns))
 
-#winnerOTwo = Image.open("TTT/OWins_TTT.gif02.gif").convert("RGB")
-#winnerOTwo = winnerOTwo.resize((total_rows,total_columns))
+oWinScreen2 = Image.open("TTT/Owins_TTT.gif02.gif").convert("RGB")
+oWinScreen2 = oWinScreen2.resize((total_rows,total_columns))
 
-#winnerOThree = Image.open("TTT/OWins_TTT.gif03.gif").convert("RGB")
-#winnerOThree = winnerOThree.resize((total_rows,total_columns).convert("RGB")
+oWinScreen3 = Image.open("TTT/Owins_TTT.gif03.gif").convert("RGB")
+oWinScreen3 = oWinScreen3.resize((total_rows,total_columns))
+
+oWinScreen4 = Image.open("TTT/Owins_TTT.gif04.gif").convert("RGB")
+oWinScreen4 = oWinScreen4.resize((total_rows,total_columns))
 
 
-#winnerXOne = Image.open("TTT/Xwins_TTT.gif01.gif").convert("RGB")
-#winnerXOne = winnerXOne.resize((total_rows,total_columns))
+xWinScreen1 = Image.open("TTT/Xwins_TTT.gif01.gif").convert("RGB")
+xWinScreen1 = oWinScreen1.resize((total_rows,total_columns))
+
+xWinScreen2 = Image.open("TTT/Xwins_TTT.gif02.gif").convert("RGB")
+xWinScreen2 = oWinScreen2.resize((total_rows,total_columns))
+
+xWinScreen3 = Image.open("TTT/Xwins_TTT.gif03.gif").convert("RGB")
+xWinScreen3 = xWinScreen3.resize((total_rows,total_columns))
+
+xWinScreen4 = Image.open("TTT/Xwins_TTT.gif04.gif").convert("RGB")
+xWinScreen4 = xWinScreen4.resize((total_rows,total_columns))
+
+
+tieScreen1 = Image.open("TTT/Tie_TTT.gif01.gif").convert("RGB")
+tieScreen1 = tieScreen1.resize((total_rows,total_columns))
+
+tieScreen2 = Image.open("TTT/Tie_TTT.gif02.gif").convert("RGB")
+tieScreen2 = tieScreen2.resize((total_rows,total_columns))
+
+tieScreen3 = Image.open("TTT/Tie_TTT.gif03.gif").convert("RGB")
+tieScreen3 = tieScreen3.resize((total_rows,total_columns))
+
+tieScreen4 = Image.open("TTT/Tie_TTT.gif04.gif").convert("RGB")
+tieScreen4 = tieScreen4.resize((total_rows,total_columns))
+
+tieScreen5 = Image.open("TTT/Tie_TTT.gif05.gif").convert("RGB")
+tieScreen5 = tieScreen5.resize((total_rows,total_columns))
+
+tieScreen6 = Image.open("TTT/Tie_TTT.gif06.gif").convert("RGB")
+tieScreen6 = tieScreen6.resize((total_rows,total_columns))
+
+#Placing the first background image
 
 matrix.SetImage(background,0,0)
 

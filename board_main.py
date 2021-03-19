@@ -2,7 +2,7 @@
 
 from rgbmatrix import RGBMatrix, RGBMatrixOptions
 
-import ticTacToeGame #games
+#import ticTacToeGame #games
 
 import start_screen #UI elements
 import game_select
@@ -31,7 +31,8 @@ options.pixel_mapper_config = 'U-mapper'
 matrix = RGBMatrix(options = options) #making the matrix for all programs
 
 if __name__ == '__main__':
-    start_screen.mainScreen(matrix)
-    print("initalized")
+	while True:
+	    start_screen.mainScreen(matrix)
+    	    print("initalized")
 
 
