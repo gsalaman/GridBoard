@@ -39,7 +39,7 @@ def drawBlank():
 if __name__ == '__main__':
         print("initalized")
 	while start_screen.mainPress == False:
-	    start_screen.mainScreen(matrix)
+	    start_screen.mainScreen(matrix, total_rows, total_columns)
 
 
             
