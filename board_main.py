@@ -1,6 +1,7 @@
 ## This is the main program running the gridboard ##
 
 from rgbmatrix import RGBMatrix, RGBMatrixOptions
+from PIL import Image
 
 #import ticTacToeGame #games
 
@@ -30,9 +31,15 @@ options.pixel_mapper_config = 'U-mapper'
 
 matrix = RGBMatrix(options = options) #making the matrix for all programs
 
+blankscreen = Image.new('RGB', (128, 128))
+
+def drawBlank():
+    matrix.SetImage(blankscreen,0,0)
+
 if __name__ == '__main__':
-	while True:
+        print("initalized")
+	while start_screen.mainPress == False:
 	    start_screen.mainScreen(matrix)
-    	    print("initalized")
 
 
+            
