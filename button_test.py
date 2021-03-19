@@ -35,13 +35,15 @@ matrix = RGBMatrix(options = options)
 ###################################
 
 icon = Image.open("icons/ghost.jpg").convert("RGB")
-icon = icon.resize(16,16)
+icon = icon.resize((16,16))
 blank = Image.new("RGB", (16,16))
 
 # This version only does presses...and toggles the ghost image on and off 
 # for each press.  This means we have to remember, for our 8x8 grid, whether
 # the square in question is on or off
-grid = [[0]*8]*8]
+grid = [[0]*8]*8
+
+print grid
 
 try:
   print("Press CTRL-C to stop")
