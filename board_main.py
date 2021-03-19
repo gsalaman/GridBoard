@@ -5,8 +5,8 @@ from PIL import Image
 
 #import ticTacToeGame #games
 
-import start_screen #UI elements
-import game_select
+#import start_screen #UI elements
+import start_screen
 
 ##RGB Matrix Standards
 # Size of one panel
@@ -38,8 +38,7 @@ def drawBlank():
 
 if __name__ == '__main__':
         print("initalized")
-	while start_screen.mainPress == False:
+	while start_screen.mainPress() == False:
 	    start_screen.mainScreen(matrix)
+	drawBlank()
 
-
-            
