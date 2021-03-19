@@ -4,6 +4,22 @@ import time
 ###########
 # Block until button is actually pressed.
 ############
+def wait_for_press():
+  current_press = read()
+  while current_press == None:
+    current_press = read()
+
+    if current_press[2] == "R":
+      # We only want presses, so go back and wait for another
+      current_press = None
+    
+    time.sleep(0.01)
+
+  return current_press
+
+###########
+# Block until button is actually pressed or released.
+############
 def read_block():
   current_press = read()
   while current_press == None:
