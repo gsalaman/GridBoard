@@ -9,31 +9,31 @@ class start_screen:
         self.total_rows = total_rows
         self.total_columns = total_columns
 
-    seconds_per_screen = 1
-    last_update_time = datetime.now()
-    home_image_index = 0
-    num_home_images = 0
-    home_images = ()
+        self.seconds_per_screen = 1
+        self.last_update_time = datetime.now()
+        self.home_image_index = 0
+        self.num_home_images = 0
+        self.home_images = ()
 
     def mainScreen(self):
 
         blank_screen = Image.new("RGB", (total_columns,total_rows))
         home1 = Image.open("converted-gifs/Top/Homescreen/Homescreen.gif01.gif").convert("RGB")
         home2 = Image.open("converted-gifs/Top/Homescreen/Homescreen.gif02.gif").convert("RGB")
-        global home_images
+        self.home_images
         home_images = (home1, home2)
-        global num_home_images
+        self.num_home_images
         num_home_images = len(home_images)
-        global home_image_index
+        self.home_image_index
 
         mainscreen = Image.open("converted-gifs/Top/Homescreen/Homescreen.gif02.gif").convert("RGB")
         rgbmatrix.SetImage(mainscreen,0,0)
 
     def nextImage(self):
-        global last_update_time
-        global home_image_index
-        global num_home_images
-        global home_images
+        self.last_update_time
+        self.home_image_index
+        self.num_home_images
+        self.home_images
 
         current_time = datetime.now()
         deltaT = current_time - last_update_time

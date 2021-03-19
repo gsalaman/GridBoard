@@ -33,6 +33,8 @@ matrix = RGBMatrix(options = options) #making the matrix for all programs
 
 blankscreen = Image.new('RGB', (128, 128))
 
+startScreen = startScreen(matrix,total_rows,total_columns)
+
 def drawBlank():
     matrix.SetImage(blankscreen,0,0)
 
