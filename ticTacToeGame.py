@@ -296,7 +296,7 @@ def oWinSequence():
   oWinScreen4 = Image.open("TTT/Owins_TTT.gif04.gif").convert("RGB")
   oWinScreen4 = oWinScreen4.resize((total_rows,total_columns))
 
-  for times in range(0,3):
+  for times in range(0,5):
     matrix.SetImage(oWinScreen1,0,0)
     sleep(frameTime)
 
@@ -314,10 +314,10 @@ def xWinSequence():
   global frameTime
 
   xWinScreen1 = Image.open("TTT/Xwins_TTT.gif01.gif").convert("RGB")
-  xWinScreen1 = oWinScreen1.resize((total_rows,total_columns))
+  xWinScreen1 = xWinScreen1.resize((total_rows,total_columns))
 
   xWinScreen2 = Image.open("TTT/Xwins_TTT.gif02.gif").convert("RGB")
-  xWinScreen2 = oWinScreen2.resize((total_rows,total_columns))
+  xWinScreen2 = xWinScreen2.resize((total_rows,total_columns))
 
   xWinScreen3 = Image.open("TTT/Xwins_TTT.gif03.gif").convert("RGB")
   xWinScreen3 = xWinScreen3.resize((total_rows,total_columns))
@@ -325,7 +325,7 @@ def xWinSequence():
   xWinScreen4 = Image.open("TTT/Xwins_TTT.gif04.gif").convert("RGB")
   xWinScreen4 = xWinScreen4.resize((total_rows,total_columns))
 
-  for xtimes in range(0,3):
+  for xtimes in range(0,5):
     matrix.SetImage(xWinScreen1,0,0)
     sleep(frameTime)
 
@@ -360,7 +360,7 @@ def tieSequence():
   tieScreen6 = Image.open("TTT/Tie_TTT.gif06.gif").convert("RGB")
   tieScreen6 = tieScreen6.resize((total_rows,total_columns))
 
-  for tieTimes in range(0,3):
+  for tieTimes in range(0,4):
     matrix.SetImage(tieScreen1,0,0)
     sleep(frameTime)
 
@@ -433,9 +433,6 @@ def show_gif(image_list, time_between_images, num_cycles):
 matrix.SetImage(background,0,0)
 
 while True:
-
-  
-  exit()
 
   playGame()
 
