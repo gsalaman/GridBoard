@@ -12,7 +12,7 @@ matXPos = [4, 36, 68,
 matYPos = [4, 4, 4,
 	  36, 36, 36,
 	  68, 68, 68]
-# Will hold our game board data 
+# Will hold our game board data
 tttBoard = ["-", "-", "-",
             "-", "-", "-",
             "-", "-", "-"]
@@ -23,11 +23,11 @@ gameStillGoing = True
 # Tells us who the winner is
 winner = None
 
-# Tells us who the current player is 
+# Tells us who the current player is
 currentPlayer = "O"
 
 
-# Play a game of tic tac toe 
+# Play a game of tic tac toe
 def playGame():
 
   displayBoard()
@@ -48,7 +48,7 @@ def playGame():
     # Flip to the other player
     flipPlayer()
 
-def showWinner():  
+def showWinner():
   # Since the game is over, print the winner or tie
   if winner == "X":
     print(winner + " won.")
@@ -119,11 +119,11 @@ def handleTurn(player):
   valid = False
   while not valid:
     position = getPositionButton()
-   
+
     # Make sure the input is valid
     # while position not in [1, 2, 3, 4, 5, 6, 7, 8, 9]:
     #  position = input("Nope.  Choose a position from 1-9: ")
- 
+
     # Get correct index in our board list
     position = int(position) - 1
 
@@ -132,7 +132,7 @@ def handleTurn(player):
       valid = True
     else:
       print("You can't go there. Go again.")
-     
+
   # Glenn's alt
   if player == 'O':
       temp_image = imageO
@@ -195,11 +195,11 @@ def checkRows():
     gameStillGoing = False
   # Return the winner
   if row1:
-    return tttBoard[0] 
+    return tttBoard[0]
   elif row2:
-    return tttBoard[3] 
+    return tttBoard[3]
   elif row3:
-    return tttBoard[6] 
+    return tttBoard[6]
   # Or return None if there was no winner
   else:
     return None
@@ -218,11 +218,11 @@ def checkColumns():
     gameStillGoing = False
   # Return the who the winner is
   if column1:
-    return tttBoard[0] 
+    return tttBoard[0]
   elif column2:
-    return tttBoard[1] 
+    return tttBoard[1]
   elif column3:
-    return tttBoard[2] 
+    return tttBoard[2]
   # Or return None if there was no winner
   else:
     return None
@@ -239,7 +239,7 @@ def checkDiagonals():
     gameStillGoing = False
   # Return the who winner is
   if diagonal1:
-    return tttBoard[0] 
+    return tttBoard[0]
   elif diagonal2:
     return tttBoard[2]
   # Or return None if there is no winner so far
@@ -277,21 +277,21 @@ from datetime import datetime
 import random
 
 # Graphics imports, constants and structures
-from rgbmatrix import RGBMatrix, RGBMatrixOptions 
+from rgbmatrix import RGBMatrix, RGBMatrixOptions
 from PIL import Image, ImageDraw, ImageFont
 
 
 
 # Size of one panel
-matrix_rows = 32 
-matrix_columns = 32 
+matrix_rows = 32
+matrix_columns = 32
 
 # How many mattixes stacked horizontally and vertically
 matrix_horizontal = 8
 matrix_vertical = 2
 
-total_rows = 128 
-total_columns = 128 
+total_rows = 128
+total_columns = 128
 
 options = RGBMatrixOptions()
 options.rows = matrix_rows
@@ -326,9 +326,9 @@ imageO = imageO.resize((24,24))
 
 frameTime = 0.25
 
-def oWinSequence(): 
+def oWinSequence():
   global frameTime
- 
+
   oWinScreen1 = Image.open("TTT/Owins_TTT.gif01.gif").convert("RGB")
   oWinScreen1 = oWinScreen1.resize((total_rows,total_columns))
 
@@ -439,7 +439,7 @@ x_image_index = 0
 tie_image_index = 0
 
 def show_gif(image_list, time_between_images, num_cycles):
-  current_cycle = 0 
+  current_cycle = 0
   num_frames = len(image_list)
   current_frame = 0
   last_update_time = datetime.now()
@@ -457,18 +457,18 @@ def show_gif(image_list, time_between_images, num_cycles):
        if current_frame == num_frames:
          current_cycle = current_cycle + 1
          if current_cycle >= num_cycles:
-           return  
+           return
          current_frame = current_frame % num_frames 
        matrix.SetImage(image_list[current_frame],0,0)
        last_update_time = current_time
 
     sleep(0.01)
 '''
-     
-  
-  
 
-    
+
+
+
+
 
 
 
