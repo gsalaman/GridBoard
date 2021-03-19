@@ -1,14 +1,17 @@
+import get_buttons
+
 #setting up global variables
+
 
 # Making matrix locations
 
-matXPos = [8, 40, 72,
-	   8, 40, 72,
-	   8, 40, 72]
+matXPos = [4, 36, 68,
+	   4, 36, 68,
+	   4, 36, 68]
 
-matYPos = [8, 8, 8,
-	  40, 40, 40,
-	  72, 72, 72]
+matYPos = [4, 4, 4,
+	  36, 36, 36,
+	  68, 68, 68]
 # Will hold our game board data 
 tttBoard = ["-", "-", "-",
             "-", "-", "-",
@@ -30,9 +33,9 @@ def playGame():
   displayBoard()
 
   if currentPlayer == 'O':
-    matrix.SetImage(imageO,99,110)
+    matrix.SetImage(smallO,99,110)
   elif currentPlayer == 'X':
-    matrix.SetImage(imageX,99,110)
+    matrix.SetImage(smallX,99,110)
   # Main game loop
   while gameStillGoing:
 
@@ -66,24 +69,60 @@ def displayBoard():
   print(tttBoard[6] + " | " + tttBoard[7] + " | " + tttBoard[8] + "     7 | 8 | 9")
 
 
+def getPositionButtonArray():
+  button = get_button.wait_for_press()
+  numButton = button[0] + 8*button[1]
+  if numButton == 0 or numButton == 1 or numButton == 8 or numButton == 9:
+    position = 1
+  elif numButton == 2 or numButton == 3 or numButton == 10 or numButton == 11:
+    position = 2
+  elif numButton == 4 or numButton == 5 or numButton == 12 or numButton == 13:
+    position = 3
+  elif numButton == 16 or numButton == 17 or numButton == 24 or numButton == 25:
+    psoiton = 4
+  elif numButton == 18 or numButton == 19 or numButton == 26 or numButton == 27:
+    position = 5
+  elif numButton == 20 or numButton == 21 or numButton == 28 or numButton == 29:
+    position = 6
+  elif numButton == 32 or numButton == 33 or numButton == 40 or numButton == 41:
+    position = 7
+  elif numButton == 34 or numButton == 35 or numButton == 42 or numButton == 43:
+    position = 8
+  elif numButton == 36 or numButton == 37 or numButton == 44 or numButton == 45:
+    position = 9
+  elif numButton == 55 or numButton == 56:
+    exit()
 
-# Handle a turn for an arbitrary player
-def handleTurn(player):
+
+def getPositionButton():
+  button = get_buttons.wait_for_press()
+  position = button[0] + 3*button[1] + 1
+  print(position)
+  print(button)
+  return position
+
+
+def getPosition():
   global imageX
   global imageO
   global matrix
+  global curentPlayer
   # Get position from player
-  print(player + "'s turn.")
+  print(currentPlayer + "'s turn.")
   position = input("Choose a position from 1-9: ")
-  print(position)
+  return position
+
+# Handle a turn for an arbitrary player
+def handleTurn(player):
 
   # Whatever the user inputs, make sure it is a valid input, and the spot is open
   valid = False
   while not valid:
-
+    position = getPositionButton()
+   
     # Make sure the input is valid
-    while position not in [1, 2, 3, 4, 5, 6, 7, 8, 9]:
-      position = input("Nope.  Choose a position from 1-9: ")
+    # while position not in [1, 2, 3, 4, 5, 6, 7, 8, 9]:
+    #  position = input("Nope.  Choose a position from 1-9: ")
  
     # Get correct index in our board list
     position = int(position) - 1
@@ -93,7 +132,7 @@ def handleTurn(player):
       valid = True
     else:
       print("You can't go there. Go again.")
-
+     
   # Glenn's alt
   if player == 'O':
       temp_image = imageO
@@ -226,10 +265,10 @@ def flipPlayer():
   global currentPlayer
   if currentPlayer == "X":
     currentPlayer = "O"
-    matrix.SetImage(imageO,99,110)
+    matrix.SetImage(smallO,99,110)
   elif currentPlayer == "O":
     currentPlayer = "X"
-    matrix.SetImage(imageX,99,110)
+    matrix.SetImage(smallX,99,110)
 
 
 from time import sleep
@@ -273,11 +312,17 @@ deltaT = current_time = last_update_time
 background = Image.open("TTT/Gameboard_TTT.png").convert("RGB")
 background = background.resize((total_rows,total_columns))
 
-imageX = Image.open("TTT/X_TTT.png").convert("RGB")
-imageX = imageX.resize((16,16))
+smallX = Image.open("TTT/X_TTT.png").convert("RGB")
+smallX = smallX.resize((16,16))
 
-imageO = Image.open("TTT/O_TTT.png").convert("RGB")
-imageO = imageO.resize((16,16))
+smallO = Image.open("TTT/O_TTT.png").convert("RGB")
+smallO = smallO.resize((16,16))
+
+imageX = Image.open("TTT/X24_24_TTT.png").convert("RGB")
+imageX = imageX.resize((24,24))
+
+imageO = Image.open("TTT/O24_24_TTT.png").convert("RGB")
+imageO = imageO.resize((24,24))
 
 frameTime = 0.25
 
