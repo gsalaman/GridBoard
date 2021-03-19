@@ -1,4 +1,4 @@
-from PIL import Image, ImageDraw, ImageFont
+from PIL import Image, ImageDraw, ImageFon
 
 import get_buttons
 
@@ -19,3 +19,4 @@ def mainPress():
         return True
       else:
         return False
+    return False
