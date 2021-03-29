@@ -1,5 +1,29 @@
+#######################################################
+# get_button library
+#
+# This version of get_button supports both button presses via the serial port
+# (from the arduino, processing the button matrix) or virtual button presses
+# from MQTT.
+#######################################################
+
+
 import serial
 import time
+import paho.mqtt.client as mqtt
+
+# queue for storting mqtt button presses.
+_mqtt_q = []
+
+#######################################################
+# MQTT callback function
+#######################################################
+def on_message(client, userdata, message):
+  global _mqtt_q
+
+  print("Recieved "+message.topic+"    "+message.payload)
+
+  _mqtt_q.append(message.payload)
+
 
 ###########
 # Block until button is actually pressed.
@@ -34,12 +58,34 @@ def read_block():
 # read
 #############
 def read():
-  global ser
+  global _ser
+  global _ser_enabled
+  global _mqtt_q
 
-  if ser.inWaiting() == 0:
+  press_available = False
+  # 1st check:  anything for us in serial land?
+  if _ser_enabled:
+    print("serial enabled")
+    if _ser.inWaiting() != 0:
+      line = _ser.readline()
+      _ser.flushInput() 
+      press_available = True
+  # 2nd check:  anything for us in mqtt-land?
+  if press_available == False and len(_mqtt_q) > 0:
+    # don't need an enabled check here...the queue still exists.
+    print("got mqtt button press")
+    line = _mqtt_q[0]
+    del _mqtt_q[0]
+    press_available = True
+
+
+  # okay, we've gone through our potential input sources.  If none of them
+  # fired, we just want to return "None" to show no press available.
+  if (press_available == False):
     return None
-  
-  line = ser.readline()
+    
+  # the rest of this processing is common between serial and mqtt presses.
+  # We've gotten a press, so we need to parse it.
 
   # first character for a press is "P", release is "R". All others not valid.
   if ((line[0] == 'P') or (line[0] == 'R')):
@@ -49,7 +95,6 @@ def read():
   
     # first check...do we have the right number of chars?
     if len(line) != 3:
-      #print("not text we care about")
       return None
 
     # a little check:  the two numbers should be between 0 and 7.
@@ -68,15 +113,37 @@ def read():
     return(x_button,y_button,action_type)
     
   else:
-    #print("Unexpected serial command:" + line)
-    pass
+    return None 
 
-  ser.flushInput() 
 
-#print("running")
-ser = serial.Serial("/dev/ttyACM0", 9600, timeout=1) 
-#ser = serial.Serial("/dev/ttyUSB0", 9600, timeout=1) 
+##########################################
+# Global inits 
+#
+#    We'll try and enable both the MQTT interface and the serial interface.
+###########################################
 
-time.sleep(0.01) # wait for serial port to open.
-if ser.isOpen():
-  print("serial connected!")
+# MQTT inits
+_client = mqtt.Client("Jumbotron")
+_client.on_message=on_message
+try:
+  _client.connect("broker.hivemq.com")
+  #_client.connect("mqttbroker")
+  _mqtt_enabled = True
+except:
+  print("Unable to connect to MQTT broker")
+  _mqtt_enabled = False
+_client.loop_start()
+_client.subscribe("jumbotron/button/#")
+
+# Serial inits
+_ser_enabled = False
+try:
+  _ser = serial.Serial("/dev/ttyACM0", 9600, timeout=1) 
+  #_ser = serial.Serial("/dev/ttyUSB0", 9600, timeout=1) 
+  time.sleep(0.01) # wait for serial port to open.
+  if _ser.isOpen():
+    print("serial connected!")
+    _ser_enabled = True
+except:
+  print("unable to open serial port")
+
