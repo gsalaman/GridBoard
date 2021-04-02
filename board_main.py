@@ -3,10 +3,8 @@
 from rgbmatrix import RGBMatrix, RGBMatrixOptions
 from PIL import Image
 
-#import ticTacToeGame #games
-
-#import start_screen #UI elements
 import start_screen
+import select_screen
 
 ##RGB Matrix Standards
 # Size of one panel
@@ -33,15 +31,23 @@ matrix = RGBMatrix(options = options) #making the matrix for all programs
 
 blankscreen = Image.new('RGB', (128, 128))
 
-startScreen = startScreen(matrix,total_rows,total_columns)
+startScreen = startScreen(matrix, total_rows, total_columns)
+selectScreen = selectScreen(matrix, total_rows, total_columns)
+screens = {
+  "splash": startScreen,
+  "select": selectScreen
+}
+
+currentScreen = startScreen
 
 def drawBlank():
+    global matrix
     matrix.SetImage(blankscreen,0,0)
 
 if __name__ == '__main__':
-        print("initalized")
-	start_screen.mainScreen(matrix, total_rows, total_columns)
-	while start_screen.mainPress() == False:
-	    start_screen.nextImage(matrix)
-	drawBlank()
+    print("initalized")
 
+    while True:
+      nextScreen = currentScreen.run()
+      drawBlank()  #may not be necessary...could require screens to do this
+      currentScreen = screens[nextScreen]
