@@ -65,7 +65,6 @@ def read():
   press_available = False
   # 1st check:  anything for us in serial land?
   if _ser_enabled:
-    print("serial enabled")
     if _ser.inWaiting() != 0:
       line = _ser.readline()
       _ser.flushInput() 
@@ -121,19 +120,23 @@ def read():
 #
 #    We'll try and enable both the MQTT interface and the serial interface.
 ###########################################
-
+print("mqtt_inits start")
 # MQTT inits
 _client = mqtt.Client("Jumbotron")
 _client.on_message=on_message
 try:
-  _client.connect("broker.hivemq.com")
-  #_client.connect("mqttbroker")
+  #_client.connect("broker.hivemq.com")
+  _client.connect("mqttbroker")
   _mqtt_enabled = True
+  print("mqtt connected")
 except:
   print("Unable to connect to MQTT broker")
   _mqtt_enabled = False
-_client.loop_start()
-_client.subscribe("jumbotron/button/#")
+
+if _mqtt_enabled == True:
+  _client.loop_start()
+  _client.subscribe("jumbotron/button/#")
+print("mqtt_inits end")
 
 # Serial inits
 _ser_enabled = False
