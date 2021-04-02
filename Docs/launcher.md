@@ -35,4 +35,6 @@ The "big loop" then looks like this:
       currentApp = apps[nextApp]
 ```
 
+# Encapsulation notes
+The thing I like about this design is that it reduces coupling between "board_main" and the apps that we are writing.  The only info that "board_main" needs to know are the app names and return codes (which are other app names).  It doesn't care about screens or timing or inputs from the apps in question.
   
