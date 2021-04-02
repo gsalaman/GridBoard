@@ -26,7 +26,8 @@ class splashApp():
     ###############################################
     def run(self):
       my_button = read()
-      while my_button == None:  
+      press_detected = False
+      while press_detected == False:  
         current_time = datetime.now()
         deltaT = current_time - self.last_update_time
 
@@ -40,6 +41,10 @@ class splashApp():
         # right now, any button press will advance us.  Eventually want to 
         # tweak this so that only the right areas of the screen advance.
         my_button = read()
+        if (my_button != None):
+          if my_button[2] == 'P':
+            print("Press detected!")
+            press_detected = True
 
         # allow for other processes to run
         time.sleep(0.01)
