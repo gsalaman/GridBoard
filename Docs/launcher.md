@@ -14,6 +14,25 @@ As an example, consider the existing game-launcher as defined by the game design
   * Screen timeouts (time TBD).  Screen returns "splash"
 
 ## Driver Code
-Check out the following snippet from the "glenn_launcher_ideas" branch of board_main,py:
+Did a quick prototype with just the splash and select screen.
+Check out the following snippet from the "glenn_launcher_ideas" branch of board_main,py.
+```
+splash = splashApp(matrix, total_rows, total_columns)
+select = selectApp(matrix, total_rows, total_columns)
+apps = {
+  "splash": splash,
+  "select": select
+}
+
+currentApp = splash 
+```
+This builds a dictionary of all of our apps, and sets the starting point to "splash".
+
+The "big loop" then looks like this:
+```
+    while True:
+      nextApp = currentApp.run()
+      currentApp = apps[nextApp]
+```
 
   
