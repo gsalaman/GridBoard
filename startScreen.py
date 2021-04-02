@@ -3,7 +3,7 @@ from get_buttons import read
 from datetime import datetime
 import time
 
-class start_screen:
+class startScreen():
     def __init__(self,rgbmatrix,total_rows,total_columns):
         self.rgbmatrix = rgbmatrix
         self.total_rows = total_rows
@@ -16,7 +16,7 @@ class start_screen:
         home1 = Image.open("converted-gifs/Top/Homescreen/Homescreen.gif01.gif").convert("RGB")
         home2 = Image.open("converted-gifs/Top/Homescreen/Homescreen.gif02.gif").convert("RGB")
         self.home_images = (home1, home2)
-        self.num_home_images = len(home_images)
+        self.num_home_images = len(self.home_images)
 
     ###############################################
     # run()
@@ -33,7 +33,7 @@ class start_screen:
         # check to see if it's time to switch the animated gif
         if deltaT.total_seconds() > self.seconds_per_screen:
             self.home_image_index = (self.home_image_index + 1) % self.num_home_images
-            self.rgbmatrix.SetImage(home_images[home_image_index],0,0)
+            self.rgbmatrix.SetImage(self.home_images[self.home_image_index],0,0)
             self.last_update_time = current_time
 
         # check for button presses

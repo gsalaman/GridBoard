@@ -3,8 +3,8 @@
 from rgbmatrix import RGBMatrix, RGBMatrixOptions
 from PIL import Image
 
-import start_screen
-import select_screen
+from startScreen import startScreen
+from selectScreen import selectScreen
 
 ##RGB Matrix Standards
 # Size of one panel
@@ -31,14 +31,14 @@ matrix = RGBMatrix(options = options) #making the matrix for all programs
 
 blankscreen = Image.new('RGB', (128, 128))
 
-startScreen = startScreen(matrix, total_rows, total_columns)
-selectScreen = selectScreen(matrix, total_rows, total_columns)
+start = startScreen(matrix, total_rows, total_columns)
+select = selectScreen(matrix, total_rows, total_columns)
 screens = {
-  "splash": startScreen,
-  "select": selectScreen
+  "splash": start,
+  "select": select
 }
 
-currentScreen = startScreen
+currentScreen = start
 
 def drawBlank():
     global matrix
