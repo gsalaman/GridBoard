@@ -6,19 +6,14 @@ These classes should all implement a "run" function that the launcher will call.
 
 ## Example
 As an example, consider the existing game-launcher as defined by the game design team.  We have the following screens and behaviors:
-* We start with the "splash" screen.  This has exactly one exit (pushing the big button in the middle) which goes to the "game select" screen (return "Select"...TBR).  It's only return value will be "game_select".
+* We start with the "splash" screen.  This has exactly one exit (pushing the big button in the middle) which goes to the "game select" screen.  It's only return value will be "select".
 * In the game select screen, we can exit in 4 ways:
   * User selects "Tic-Tac-Toe".  Screen returns "TTT".
   * User selects "Connect 4".  Screen returns "C4".
   * User selects "Minesweeper".  Screen returns "MS"
-  * Screen timeouts (time TBD).  Screen returns "Splash"
+  * Screen timeouts (time TBD).  Screen returns "splash"
 
 ## Driver Code
-This means that inside of our main launcher code, we have the following code:
-```
-startScreen = startScreen(matrix, total_rows, total_columns)
-while True:
-  nextScreen = currentScreen.run()
-  if nextScreen == "Splash":
-    currentScreen
+Check out the following snippet from the "glenn_launcher_ideas" branch of board_main,py:
+
   
