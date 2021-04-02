@@ -3,7 +3,7 @@ from get_buttons import read
 from datetime import datetime
 import time
 
-class startScreen():
+class splashApp():
     def __init__(self,rgbmatrix,total_rows,total_columns):
         self.rgbmatrix = rgbmatrix
         self.total_rows = total_rows

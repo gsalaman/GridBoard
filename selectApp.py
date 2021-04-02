@@ -1,5 +1,5 @@
 ##############################################
-# selectScreen
+# selectApp
 #
 # In this iteration, we display the full menu (no animation) and stall. 
 #
@@ -12,7 +12,7 @@ from get_buttons import read
 from datetime import datetime
 import time
 
-class selectScreen():
+class selectApp():
     def __init__(self,rgbmatrix,total_rows,total_columns):
         self.rgbmatrix = rgbmatrix
         self.total_rows = total_rows
