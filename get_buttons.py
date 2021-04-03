@@ -81,6 +81,8 @@ def read():
   # okay, we've gone through our potential input sources.  If none of them
   # fired, we just want to return "None" to show no press available.
   if (press_available == False):
+    #print("no press")
+    time.sleep(0.01)
     return None
     
   # the rest of this processing is common between serial and mqtt presses.
@@ -126,7 +128,8 @@ _client = mqtt.Client("Jumbotron")
 _client.on_message=on_message
 try:
   #_client.connect("broker.hivemq.com")
-  _client.connect("mqttbroker")
+  #_client.connect("mqttbroker")
+  _client.connect("matrix-pi1.local")
   _mqtt_enabled = True
   print("mqtt connected")
 except:
@@ -140,13 +143,15 @@ print("mqtt_inits end")
 
 # Serial inits
 _ser_enabled = False
+
+'''
 try:
   _ser = serial.Serial("/dev/ttyACM0", 9600, timeout=1) 
   #_ser = serial.Serial("/dev/ttyUSB0", 9600, timeout=1) 
-  time.sleep(0.01) # wait for serial port to open.
+  time.sleep(1) # wait for serial port to open.
   if _ser.isOpen():
     print("serial connected!")
     _ser_enabled = True
 except:
   print("unable to open serial port")
-
+'''

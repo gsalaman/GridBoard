@@ -10,15 +10,21 @@ from rgbmatrix import RGBMatrix, RGBMatrixOptions
 from PIL import Image, ImageDraw, ImageFont
 
 # this is the size of ONE of our matrixes. 
-matrix_rows = 32 
-matrix_columns = 32 
+#matrix_rows = 32 
+#matrix_columns = 32 
+matrix_rows = 64 
+matrix_columns = 64 
 
 # how many matrixes stacked horizontally and vertically 
-matrix_horizontal = 8 
-matrix_vertical = 2
+#matrix_horizontal = 8 
+#matrix_vertical = 2
+matrix_horizontal = 1 
+matrix_vertical = 1
 
-total_rows = 128 
-total_columns = 128
+#total_rows = 128 
+#total_columns = 128
+total_rows = 64 
+total_columns = 64 
 
 options = RGBMatrixOptions()
 options.rows = matrix_rows 
@@ -26,7 +32,8 @@ options.cols = matrix_columns
 options.chain_length = matrix_horizontal
 options.parallel = matrix_vertical 
 options.hardware_mapping = 'regular' 
-options.pixel_mapper_config = 'U-mapper'
+#options.pixel_mapper_config = 'U-mapper'
+options.gpio_slowdown = 2
 
 matrix = RGBMatrix(options = options)
 
