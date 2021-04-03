@@ -5,7 +5,7 @@ from PIL import Image
 
 from splashApp import splashApp
 from selectApp import selectApp
-#from TTT import TTTApp
+from TTT import TTT
 
 ##RGB Matrix Standards
 # Size of one panel
@@ -34,11 +34,11 @@ blankscreen = Image.new('RGB', (128, 128))
 
 splash = splashApp(matrix, total_rows, total_columns)
 select = selectApp(matrix, total_rows, total_columns)
-#ttt = TTTApp(matrix, total_rows, total_columns)
+ttt = TTT(matrix, total_rows, total_columns)
 apps = {
   "splash": splash,
   "select": select,
-#  "ttt": ttt
+  "ttt": ttt
 }
 
 currentApp = splash 

@@ -5,8 +5,7 @@
 # changes to fit it into the launcher framework.
 #
 ######################################
-
-from get_buttons import read
+from get_buttons import wait_for_press 
 from PIL import Image, ImageDraw, ImageFont
 from time import sleep
 from datetime import datetime
@@ -38,38 +37,16 @@ winner = None
 # Tells us who the current player is
 currentPlayer = "O"
 
+# these are forward declarations of variables that will be set when our
+# class initializes.
 matrix = None
 total_rows = 1
 total_columns = 1
-
-class TTT():
-  def __init__(self,rgbmatrix,rows,columns):
-    global matrix
-    global total_rows
-    global total_columns
-
-    matrix = rgbmatrix
-    total_rows = rows
-    total_columns = columns
-  def run(self):
-    #Placing the first background image
-    matrix.SetImage(background,0,0)
-
-    while True:
-      playGame()
-
-      showWinner()
-
-      sleep(5)
-
-      gameStillGoing = True
-      winner = None
-
-      tttBoard =["-","-","-",
-                 "-","-","-",
-                 "-","-","-"]
-
-      matrix.SetImage(background,0,0)
+background = None
+smallX = None
+smallY = None
+imageX = None
+imageY = None
 
 # Play a game of tic tac toe
 def playGame():
@@ -114,7 +91,7 @@ def displayBoard():
 
 
 def getPositionButtonArray():
-  button = get_button.wait_for_press()
+  button = wait_for_press()
   numButton = button[0] + 8*button[1]
   if numButton == 0 or numButton == 1 or numButton == 8 or numButton == 9:
     position = 1
@@ -139,7 +116,7 @@ def getPositionButtonArray():
 
 
 def getPositionButton():
-  button = get_buttons.wait_for_press()
+  button = wait_for_press()
   position = button[0] + 3*button[1] + 1
   print(position)
   print(button)
@@ -193,6 +170,7 @@ def handleTurn(player):
 
   # Show the game board
   displayBoard()
+
 
 
 # Check if the game is over
@@ -315,25 +293,31 @@ def flipPlayer():
     matrix.SetImage(smallX,99,110)
 
 
-last_update_time = datetime.now()
-current_time = datetime.now()
-deltaT = current_time = last_update_time
+
 
 # Putting the images/gifs in
-background = Image.open("TTT/Gameboard_TTT.png").convert("RGB")
-background = background.resize((total_rows,total_columns))
 
-smallX = Image.open("TTT/X_TTT.png").convert("RGB")
-smallX = smallX.resize((16,16))
+def init_images():
+  global background
+  global smallX
+  global smallO
+  global imageX
+  global imageO
 
-smallO = Image.open("TTT/O_TTT.png").convert("RGB")
-smallO = smallO.resize((16,16))
+  background = Image.open("TTT/Gameboard_TTT.png").convert("RGB")
+  background = background.resize((total_rows,total_columns))
 
-imageX = Image.open("TTT/X24_24_TTT.png").convert("RGB")
-imageX = imageX.resize((24,24))
+  smallX = Image.open("TTT/X_TTT.png").convert("RGB")
+  smallX = smallX.resize((16,16))
 
-imageO = Image.open("TTT/O24_24_TTT.png").convert("RGB")
-imageO = imageO.resize((24,24))
+  smallO = Image.open("TTT/O_TTT.png").convert("RGB")
+  smallO = smallO.resize((16,16))
+
+  imageX = Image.open("TTT/X24_24_TTT.png").convert("RGB")
+  imageX = imageX.resize((24,24))
+
+  imageO = Image.open("TTT/O24_24_TTT.png").convert("RGB")
+  imageO = imageO.resize((24,24))
 
 frameTime = 0.25
 
@@ -435,6 +419,42 @@ def tieSequence():
     matrix.SetImage(tieScreen6,0,0)
     sleep(frameTime)
 
+class TTT():
+  def __init__(self,rgbmatrix,rows,columns):
+    print("TTT init")
+    global matrix
+    global total_rows
+    global total_columns
+
+    matrix = rgbmatrix
+    total_rows = rows
+    total_columns = columns
+ 
+    init_images()
+
+  def run(self):
+    print("TTT run")
+    global matrix
+    global background
+
+    #Placing the first background image
+    matrix.SetImage(background,0,0)
+
+    while True:
+      playGame()
+
+      showWinner()
+
+      sleep(5)
+
+      gameStillGoing = True
+      winner = None
+
+      tttBoard =["-","-","-",
+                 "-","-","-",
+                 "-","-","-"]
+
+      matrix.SetImage(background,0,0)
 
 '''
 #oWinImages = (oWinScreen1, oWinScreen2, oWinScreen3, oWinScreen4)
@@ -448,6 +468,10 @@ tieImages = (tieScreen1, tieScreen2, tieScreen3, tieScreen4, tieScreen5, tieScre
 o_image_index = 0
 x_image_index = 0
 tie_image_index = 0
+
+last_update_time = datetime.now()
+current_time = datetime.now()
+deltaT = current_time = last_update_time
 
 def show_gif(image_list, time_between_images, num_cycles):
   current_cycle = 0

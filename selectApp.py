@@ -37,7 +37,10 @@ class selectApp():
           print my_button
           if my_button[2]=="P":
             press_detected = True
-            return "splash"
+            if my_button[1] == 7:
+              return "ttt"
+            else:
+              return "splash"
         time.sleep(0.1)
 
       # If we're here, it means that the user pressed a button.  Time to 
