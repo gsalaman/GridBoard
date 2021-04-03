@@ -34,7 +34,7 @@ matrix = RGBMatrix(options = options)
 # Main code 
 ###################################
 
-icon = Image.open("icons/MS_bomb.png").convert("RGB")
+icon = Image.open("../icons/MS_bomb.png").convert("RGB")
 blank = Image.new("RGB", (16,16))
 
 try:

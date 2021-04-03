@@ -34,7 +34,7 @@ matrix = RGBMatrix(options = options)
 # Main code 
 ###################################
 
-icon = Image.open("icons/ghost.jpg").convert("RGB")
+icon = Image.open("../icons/ghost.jpg").convert("RGB")
 icon = icon.resize((16,16))
 blank = Image.new("RGB", (16,16))
 
@@ -48,26 +48,20 @@ print grid
 try:
   print("Press CTRL-C to stop")
   while True:
-    my_button = get_buttons.read()
-    if my_button != None:
-      print("Main - button x: "+str(my_button[0]))
-      print("Main - button y: "+str(my_button[1]))
+    my_button = get_buttons.wait_for_press()
   
-      x = my_button[0] 
-      y = my_button[1] 
+    x = my_button[0] 
+    y = my_button[1] 
   
-      # if it's a press...
-      if my_button[2]=="P":
-        #...and the square is currently off...
-        if grid[x][y] == 0:
+    # if the square is currently off...
+    if grid[x][y] == 0:
           # turn on the square.
           matrix.SetImage(icon,x*16,y*16)
           grid[x][y] = 1
-       #otherwise turn off that square
-        else:
+     #otherwise turn off that square
+    else:
           matrix.SetImage(blank,x*16,y*16)
           grid[x][y] = 0
-    time.sleep(.01)
 
 except KeyboardInterrupt:
   exit(0)
