@@ -6,7 +6,11 @@
 #
 ######################################
 
-import get_buttons
+from get_buttons import read
+from PIL import Image, ImageDraw, ImageFont
+from time import sleep
+from datetime import datetime
+import random
 
 #setting up global variables
 
@@ -34,6 +38,38 @@ winner = None
 # Tells us who the current player is
 currentPlayer = "O"
 
+matrix = None
+total_rows = 1
+total_columns = 1
+
+class TTT():
+  def __init__(self,rgbmatrix,rows,columns):
+    global matrix
+    global total_rows
+    global total_columns
+
+    matrix = rgbmatrix
+    total_rows = rows
+    total_columns = columns
+  def run(self):
+    #Placing the first background image
+    matrix.SetImage(background,0,0)
+
+    while True:
+      playGame()
+
+      showWinner()
+
+      sleep(5)
+
+      gameStillGoing = True
+      winner = None
+
+      tttBoard =["-","-","-",
+                 "-","-","-",
+                 "-","-","-"]
+
+      matrix.SetImage(background,0,0)
 
 # Play a game of tic tac toe
 def playGame():
@@ -279,39 +315,6 @@ def flipPlayer():
     matrix.SetImage(smallX,99,110)
 
 
-from time import sleep
-from datetime import datetime
-
-import random
-
-# Graphics imports, constants and structures
-from rgbmatrix import RGBMatrix, RGBMatrixOptions
-from PIL import Image, ImageDraw, ImageFont
-
-
-
-# Size of one panel
-matrix_rows = 32
-matrix_columns = 32
-
-# How many mattixes stacked horizontally and vertically
-matrix_horizontal = 8
-matrix_vertical = 2
-
-total_rows = 128
-total_columns = 128
-
-options = RGBMatrixOptions()
-options.rows = matrix_rows
-options.cols = matrix_columns
-options.chain_length = matrix_horizontal
-options.parallel = matrix_vertical
-options.hardware_mapping = 'regular'
-options.gpio_slowdown = 2
-options.pixel_mapper_config = 'U-mapper'
-
-matrix = RGBMatrix(options = options)
-
 last_update_time = datetime.now()
 current_time = datetime.now()
 deltaT = current_time = last_update_time
@@ -472,32 +475,3 @@ def show_gif(image_list, time_between_images, num_cycles):
 
     sleep(0.01)
 '''
-
-
-
-
-
-
-
-
-
-#Placing the first background image
-
-matrix.SetImage(background,0,0)
-
-while True:
-
-  playGame()
-
-  showWinner()
-
-  sleep(5)
-
-  gameStillGoing = True
-  winner = None
-
-  tttBoard =["-","-","-",
-             "-","-","-",
-             "-","-","-"]
-
-  matrix.SetImage(background,0,0)
