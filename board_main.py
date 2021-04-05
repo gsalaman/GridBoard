@@ -3,10 +3,9 @@
 from rgbmatrix import RGBMatrix, RGBMatrixOptions
 from PIL import Image
 
-#import ticTacToeGame #games
-
-#import start_screen #UI elements
-import start_screen
+from splashApp import splashApp
+from selectApp import selectApp
+from TTT import TTT
 
 ##RGB Matrix Standards
 # Size of one panel
@@ -33,15 +32,25 @@ matrix = RGBMatrix(options = options) #making the matrix for all programs
 
 blankscreen = Image.new('RGB', (128, 128))
 
-startScreen = startScreen(matrix,total_rows,total_columns)
+splash = splashApp(matrix, total_rows, total_columns)
+select = selectApp(matrix, total_rows, total_columns)
+ttt = TTT(matrix, total_rows, total_columns)
+apps = {
+  "splash": splash,
+  "select": select,
+  "ttt": ttt
+}
+
+currentApp = splash 
 
 def drawBlank():
+    global matrix
     matrix.SetImage(blankscreen,0,0)
 
 if __name__ == '__main__':
-        print("initalized")
-	start_screen.mainScreen(matrix, total_rows, total_columns)
-	while start_screen.mainPress() == False:
-	    start_screen.nextImage(matrix)
-	drawBlank()
+    print("initalized")
 
+    while True:
+      nextApp = currentApp.run()
+      currentApp = apps[nextApp]
+      print("App switch!")

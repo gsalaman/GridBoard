@@ -34,7 +34,7 @@ matrix = RGBMatrix(options = options)
 # Main code 
 ###################################
 
-icon = Image.open("icons/ghost.jpg").convert("RGB")
+icon = Image.open("../icons/ghost.jpg").convert("RGB")
 icon = icon.resize((16,16))
 blank = Image.new("RGB", (16,16))
 
