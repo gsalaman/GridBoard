@@ -27,3 +27,13 @@ We'll use two 8x8 arrays to drive the game:
   * if it's a long press and it's not a mine, show that square
 
 ## Input processing
+Our existing "read" interface from `get_buttons.py` returns a tuple with x,y,and Press type...either `"P"` for a press or `"R"` for release.
+
+To detect long vs short presses, we'll need to keep track of "state" for each button:  is it currently pressed?  The algo is as follows:
+* When we get a press, store a timestamp for when that press started
+* When we get a release, see how long that button has been down.  
+  * If it's short (less than 2s?), count it as a short press.  
+  * If it's long, count it as long.
+  * Don't forget to set the button state back to "not pressed"
+
+We could also add a little logic to show a "select" icon on press to give the user feedback.
