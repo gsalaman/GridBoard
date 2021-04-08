@@ -128,8 +128,8 @@ _client = mqtt.Client("Jumbotron")
 _client.on_message=on_message
 try:
   #_client.connect("broker.hivemq.com")
-  #_client.connect("mqttbroker")
-  _client.connect("matrix-pi1.local")
+  _client.connect("mqttbroker")
+  #_client.connect("matrix-pi1.local")
   _mqtt_enabled = True
   print("mqtt connected")
 except:
@@ -144,7 +144,6 @@ print("mqtt_inits end")
 # Serial inits
 _ser_enabled = False
 
-'''
 try:
   _ser = serial.Serial("/dev/ttyACM0", 9600, timeout=1) 
   #_ser = serial.Serial("/dev/ttyUSB0", 9600, timeout=1) 
@@ -154,4 +153,3 @@ try:
     _ser_enabled = True
 except:
   print("unable to open serial port")
-'''
