@@ -419,6 +419,12 @@ def tieSequence():
     matrix.SetImage(tieScreen6,0,0)
     sleep(frameTime)
 
+def reset_board():
+  global tttBoard
+
+  for i in range(9):
+    tttBoard[i] = "-"
+ 
 class TTT():
   def __init__(self,rgbmatrix,rows,columns):
     print("TTT init")
@@ -436,16 +442,20 @@ class TTT():
     print("TTT run")
     global matrix
     global background
+    global gameStillGoing
+    global winner
 
     #Placing the first background image
     matrix.SetImage(background,0,0)
 
     while True:
+      reset_board()
+ 
       playGame()
 
       showWinner()
 
-      sleep(5)
+      sleep(1)
 
       gameStillGoing = True
       winner = None
@@ -455,6 +465,8 @@ class TTT():
                  "-","-","-"]
 
       matrix.SetImage(background,0,0)
+
+      return "splash"
 
 '''
 #oWinImages = (oWinScreen1, oWinScreen2, oWinScreen3, oWinScreen4)
