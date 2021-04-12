@@ -17,7 +17,7 @@ class ee():
         self.home_images = []
         for i in range(1,15):
           filename = "ee/ee"+str(i)+".png"
-          tmp_image = Image.open(filename)
+          tmp_image = Image.open(filename).convert("RGB")
           self.home_images.append(tmp_image)
 
         self.num_home_images = len(self.home_images)
@@ -34,7 +34,7 @@ class ee():
         # check to see if it's time to switch the animated gif
         if deltaT.total_seconds() > self.seconds_per_screen:
             # only update until we hit the last image...then we'll hold there.
-            if (self.home_image_index < self.num_home_images):
+            if (self.home_image_index + 1 < self.num_home_images):
               self.home_image_index = self.home_image_index + 1 
               self.rgbmatrix.SetImage(self.home_images[self.home_image_index],0,0)
             self.last_update_time = current_time

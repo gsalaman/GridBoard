@@ -41,7 +41,7 @@ class msApp():
           scroll_index = (scroll_index + 1) % self.scroll_pixels
       
           # blank the old text
-          text_draw.rectangle((0,0,128,32) fill = (0,0,0))
+          text_draw.rectangle((0,0,128,32), fill=(0,0,0))
 
           # draw the new text
           text_draw.text((128 - scroll_index, 0), self.scroll_text)

@@ -46,7 +46,7 @@ class splashApp():
             print("Press detected!")
             press_detected = True
             if (my_button[1] == 7):
-              if (my_button[0] == 3) or (my_button[1] == 4):
+              if (my_button[0] == 3) or (my_button[0] == 4):
                 return "ee" 
 
         # allow for other processes to run
