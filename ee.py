@@ -3,7 +3,7 @@ from get_buttons import read
 from datetime import datetime
 import time
 
-class splashApp():
+class ee():
     def __init__(self,rgbmatrix,total_rows,total_columns):
         self.rgbmatrix = rgbmatrix
         self.total_rows = total_rows
@@ -13,16 +13,17 @@ class splashApp():
         self.last_update_time = datetime.now()
         self.home_image_index = 0
        
-        home1 = Image.open("converted-gifs/Top/Homescreen/Homescreen.gif01.gif").convert("RGB")
-        home2 = Image.open("converted-gifs/Top/Homescreen/Homescreen.gif02.gif").convert("RGB")
-        self.home_images = (home1, home2)
+        # okay, I can't bring myself to type or copy 14 filenames.  
+        self.home_images = []
+        for i in range(1,15):
+          filename = "ee/ee"+str(i)+".png"
+          tmp_image = Image.open(filename)
+          self.home_images.append(tmp_image)
+
         self.num_home_images = len(self.home_images)
 
     ###############################################
     # run()
-    #
-    # This function cycles through all the animated gifs until a button is 
-    # pressed.
     ###############################################
     def run(self):
       press_detected = False
@@ -32,26 +33,22 @@ class splashApp():
 
         # check to see if it's time to switch the animated gif
         if deltaT.total_seconds() > self.seconds_per_screen:
-            self.home_image_index = (self.home_image_index + 1) % self.num_home_images
-            self.rgbmatrix.SetImage(self.home_images[self.home_image_index],0,0)
+            # only update until we hit the last image...then we'll hold there.
+            if (self.home_image_index < self.num_home_images):
+              self.home_image_index = self.home_image_index + 1 
+              self.rgbmatrix.SetImage(self.home_images[self.home_image_index],0,0)
             self.last_update_time = current_time
 
         # check for button presses
-        # right now, any button press will advance us.  Eventually want to 
-        # tweak this so that only the right areas of the screen advance.
         my_button = read()
         if (my_button != None):
           print("button event")
           if my_button[2] == 'P':
             print("Press detected!")
             press_detected = True
-            if (my_button[1] == 7):
-              if (my_button[0] == 3) or (my_button[1] == 4):
-                return "ee" 
 
         # allow for other processes to run
         time.sleep(0.01)
 
-      # once we have a button press, exit. From the splash screen we always
-      # go to the game select screen.
-      return "select"
+      # once we have a button press, exit back to the splash screen
+      return "splash"
