@@ -466,7 +466,7 @@ class TTT():
 
       matrix.SetImage(background,0,0)
 
-      return "splash"
+      return "select"
 
 '''
 #oWinImages = (oWinScreen1, oWinScreen2, oWinScreen3, oWinScreen4)

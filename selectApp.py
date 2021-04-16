@@ -29,21 +29,18 @@ class selectApp():
       # we only have one "screen" in this iteration....show it.
       self.rgbmatrix.SetImage(self.image,0,0)
       
-      # now wait for a button press....on press, we'll go back to splash.
-      press_deteted = False 
-      while press_deteted == False:
+      # now wait for a button press
+      while True:
         my_button = read()
         if my_button != None:
           print my_button
           if my_button[2]=="P":
-            press_detected = True
-            if my_button[1] == 7:
+            if (my_button[1] == 1) or (my_button[1] == 2):
+              return "ms"
+            #elif (my_button[1] == 3) or (my_button[1] == 4):
+            #  return "c4"
+            elif (my_button[1] == 6) or (my_button[1] == 5):
               return "ttt"
             else:
               return "splash"
         time.sleep(0.1)
-
-      # If we're here, it means that the user pressed a button.  Time to 
-      # go back to the splash screen.
-      return "splash"
-
