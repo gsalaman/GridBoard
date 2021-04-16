@@ -10,9 +10,13 @@
 import serial
 import time
 import paho.mqtt.client as mqtt
+from datetime import datetime
 
 # queue for storting mqtt button presses.
 _mqtt_q = []
+
+# time array to detect long and short presses
+press_time = [[None for i in range(8)] for j in range(8)]
 
 #######################################################
 # MQTT callback function
@@ -52,6 +56,61 @@ def read_block():
     time.sleep(0.01)
     current_press = read()
   return current_press
+
+############################
+# read_long_short
+#
+# For the purposes of this function, a press gets catagorized upon release.
+# A short press is if the button was held down for less than 1.5s.
+# A long press is if the button was held down for longer than 1.5s.
+#
+# This function will either return:
+#   - None if there was no press 
+#   or a tuple with:
+#     index 0 for x location
+#     index 1 for y location
+#     index 2 with either:
+#        "S" for short press
+#        "L" for long press
+########################################
+def read_long_short():
+  global press_time
+
+  long_press_duration = 1.5
+
+  press = read()
+  if (press == None):
+    return None
+  
+  if (press[2] == "P"):
+    print("Press Detected: "+str(press[0])+","+str(press[1]))
+    if press_time[press[0]][press[1]] != None:
+      # This shouldn't happen...
+      print("Press whilst still pressed.")
+
+    # Mark the timestamp
+    press_time[press[0]][press[1]] = datetime.now()
+
+  elif (press[2] == "R"):
+    curr_time = datetime.now()
+    print("Release Detected: "+str(press[0])+","+str(press[1]))
+
+    start_time = press_time[press[0]][press[1]]
+    if start_time == None:
+      print("No corresponding press (?!?)")
+      return Noone
+
+    deltaT = curr_time - start_time
+    press_time[press[0]][press[1]] = None
+    
+
+    if deltaT.total_seconds() > long_press_duration:
+      ret_val = (press[0],press[1],"L")
+    else:
+      print("Short press!")
+      ret_val = (press[0],press[1],"S")
+ 
+    return ret_val
 
 
 ##############
