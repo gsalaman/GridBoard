@@ -33,6 +33,7 @@ while True:
         continue
 
       deltaT = curr_time - start_time
+      press_time[press[0]][press[1]] = None
       if deltaT.total_seconds() > long_press_duration:
         print("Long press!")
       else:

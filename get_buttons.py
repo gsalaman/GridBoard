@@ -67,7 +67,7 @@ def read():
   if _ser_enabled:
     if _ser.inWaiting() != 0:
       line = _ser.readline()
-      _ser.flushInput() 
+      #_ser.flushInput() 
       press_available = True
   # 2nd check:  anything for us in mqtt-land?
   if press_available == False and len(_mqtt_q) > 0:
