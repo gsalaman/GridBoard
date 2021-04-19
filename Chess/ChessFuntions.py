@@ -1,7 +1,11 @@
 from chessmoves import *
 import pprint
 class Chessgame:
-    def __init__(self):
+    def __init__(self,rgbmatrix,total_rows,total_columns):
+        self.rgbmatrix = rgbmatrix
+        self.total_rows = total_rows
+        self.total_columns = total_columns
+   
         self.funtions = PiceMoves()
     def setup(self):
         ''''

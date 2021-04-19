@@ -1,4 +1,4 @@
-## This is the main program running the gridboard ##
+# This is the main program running the gridboard ##
 
 from rgbmatrix import RGBMatrix, RGBMatrixOptions
 from PIL import Image
@@ -8,6 +8,7 @@ from selectApp import selectApp
 from TTT import TTT
 from ee import ee
 from msApp import msApp
+from Chess.ChessFuntions import Chessgame
 
 ##RGB Matrix Standards
 # Size of one panel
@@ -39,13 +40,15 @@ select = selectApp(matrix, total_rows, total_columns)
 ttt = TTT(matrix, total_rows, total_columns)
 ee = ee(matrix, total_rows, total_columns)
 ms = msApp(matrix, total_rows, total_columns)
+Chess = Chessgame(matrix, total_rows, total_columns)
 
 apps = {
   "splash": splash,
   "select": select,
   "ttt": ttt,
   "ee": ee,
-  "ms": ms
+  "ms": ms,
+  "Chess": Chess
 }
 
 currentApp = splash 
