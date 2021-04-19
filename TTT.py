@@ -296,6 +296,8 @@ def flipPlayer():
 
 
 # Putting the images/gifs in
+#How_To_Play_Screen = Image.open("TTT/How_To_Play.png").convert("RGB")
+#How_To_Play_Screen = How_To_Play_Screen.resize((total_rows,total_columns))
 
 def init_images():
   global background
