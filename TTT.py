@@ -92,6 +92,8 @@ def displayBoard():
 
 
 def getPositionButtonArray():
+  position = 0
+
   button = wait_for_press()
   numButton = button[0] + 8*button[1]
   if numButton == 0 or numButton == 1 or numButton == 8 or numButton == 9:
@@ -101,7 +103,7 @@ def getPositionButtonArray():
   elif numButton == 4 or numButton == 5 or numButton == 12 or numButton == 13:
     position = 3
   elif numButton == 16 or numButton == 17 or numButton == 24 or numButton == 25:
-    psoiton = 4
+    position = 4
   elif numButton == 18 or numButton == 19 or numButton == 26 or numButton == 27:
     position = 5
   elif numButton == 20 or numButton == 21 or numButton == 28 or numButton == 29:
