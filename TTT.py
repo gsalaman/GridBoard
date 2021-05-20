@@ -61,7 +61,8 @@ def playGame():
   while gameStillGoing:
 
     # Handle a turn
-    handleTurn(currentPlayer)
+    if handleTurn(currentPlayer) == "exit":
+      return "exit"
 
     # Check if the game is over
     checkGameOver()
@@ -112,7 +113,9 @@ def getPositionButtonArray():
   elif numButton == 36 or numButton == 37 or numButton == 44 or numButton == 45:
     position = 9
   elif numButton == 55 or numButton == 56:
-    exit()
+    return "exit"
+
+  return position 
 
 
 def getPositionButton():
@@ -139,11 +142,17 @@ def handleTurn(player):
   # Whatever the user inputs, make sure it is a valid input, and the spot is open
   valid = False
   while not valid:
-    position = getPositionButton()
+
+    position = getPositionButtonArray()
+    # position = getPositionButton()
 
     # Make sure the input is valid
     # while position not in [1, 2, 3, 4, 5, 6, 7, 8, 9]:
     #  position = input("Nope.  Choose a position from 1-9: ")
+
+    # check for exits
+    if position == "exit":
+      return "exit"
 
     # Get correct index in our board list
     position = int(position) - 1
@@ -296,6 +305,8 @@ def flipPlayer():
 
 
 # Putting the images/gifs in
+# These need to go into the class init soz not to interfere with MQTT button
+# presses
 #How_To_Play_Screen = Image.open("TTT/How_To_Play.png").convert("RGB")
 #How_To_Play_Screen = How_To_Play_Screen.resize((total_rows,total_columns))
 
@@ -453,7 +464,8 @@ class TTT():
     while True:
       reset_board()
  
-      playGame()
+      if (playGame() == "exit"):
+        return "select"
 
       showWinner()
 
@@ -467,8 +479,15 @@ class TTT():
                  "-","-","-"]
 
       matrix.SetImage(background,0,0)
-
-      return "select"
+  
+      # I think tunneling the "exit" from:
+      #   playGame()->handleTurn()->getPosition
+      # should be good enough to kick us back up...and here, we should 
+      # just be able to head back to the beginning of our loop (assuming
+      # that reset_board() does it's job...so no return should be needed.
+      # With that said, I'm gonna keep this here in case we need to return "TTT"
+      # to properly loop.
+      # return "select"
 
 '''
 #oWinImages = (oWinScreen1, oWinScreen2, oWinScreen3, oWinScreen4)

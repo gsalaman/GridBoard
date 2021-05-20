@@ -1,11 +1,11 @@
 // Keyboard Matrix
 
 // rows are inputs
-byte rows[] = {2,3,4};
+byte rows[] = {2,3,4,5,6,7,8,9};
 const int rowCount = sizeof(rows)/sizeof(rows[0]);
 
-//columns are outputs
-byte cols[] = {22,23,24};
+//columns are outputs.  
+byte cols[] = {22,24,26,28,30,32,34,36};
 const int colCount = sizeof(cols)/sizeof(cols[0]);
  
 byte keys[colCount][rowCount];
@@ -13,6 +13,7 @@ byte lastKeys[colCount][rowCount];
 
 void setup() {
     Serial.begin(9600);
+    Serial.println("Initialized");
 
     for (int colIndex=0; colIndex < colCount; colIndex++) { //fills with unpressed as inital state
       for (int rowIndex=0; rowIndex < rowCount; rowIndex++) {
