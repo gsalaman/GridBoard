@@ -29,7 +29,7 @@ options.chain_length = matrix_horizontal
 options.parallel = matrix_vertical
 options.hardware_mapping = 'regular'
 options.gpio_slowdown = 2
-options.pixel_mapper_config = 'U-mapper'
+options.pixel_mapper_config = 'U-mapper;Rotate:180'
 
 matrix = RGBMatrix(options = options) #making the matrix for all programs
 
