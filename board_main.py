@@ -9,6 +9,7 @@ from TTT import TTT
 from ee import ee
 from msApp import msApp
 from Chess.ChessFuntions import Chessgame
+from brightApp import brightApp
 
 ##RGB Matrix Standards
 # Size of one panel
@@ -41,6 +42,7 @@ ttt = TTT(matrix, total_rows, total_columns)
 ee = ee(matrix, total_rows, total_columns)
 ms = msApp(matrix, total_rows, total_columns)
 Chess = Chessgame(matrix, total_rows, total_columns)
+bright = brightApp(matrix, total_rows, total_columns)
 
 apps = {
   "splash": splash,
@@ -48,7 +50,8 @@ apps = {
   "ttt": ttt,
   "ee": ee,
   "ms": ms,
-  "Chess": Chess
+  "Chess": Chess,
+  "bright": bright
 }
 
 currentApp = splash 
