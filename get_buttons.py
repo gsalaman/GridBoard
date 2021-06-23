@@ -185,15 +185,20 @@ print("mqtt_inits start")
 # MQTT inits
 _client = mqtt.Client("Jumbotron")
 _client.on_message=on_message
-try:
-  #_client.connect("broker.hivemq.com")
-  _client.connect("mqttbroker")
-  #_client.connect("matrix-pi1.local")
-  _mqtt_enabled = True
-  print("mqtt connected")
-except:
-  print("Unable to connect to MQTT broker")
-  _mqtt_enabled = False
+
+# poor man's enable/disable
+try_mqtt = False
+_mqtt_enabled = False
+if try_mqtt == True:
+  try:
+    #_client.connect("broker.hivemq.com")
+    _client.connect("mqttbroker")
+    #_client.connect("matrix-pi1.local")
+    _mqtt_enabled = True
+    print("mqtt connected")
+  except:
+    print("Unable to connect to MQTT broker")
+    _mqtt_enabled = False
 
 if _mqtt_enabled == True:
   _client.loop_start()
