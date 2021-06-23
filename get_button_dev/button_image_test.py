@@ -32,7 +32,7 @@ options.cols = matrix_columns
 options.chain_length = matrix_horizontal
 options.parallel = matrix_vertical 
 options.hardware_mapping = 'regular' 
-options.pixel_mapper_config = 'U-mapper'
+options.pixel_mapper_config = 'U-mapper;Rotate:180'
 options.gpio_slowdown = 2
 
 matrix = RGBMatrix(options = options)
