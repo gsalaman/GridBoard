@@ -35,8 +35,8 @@ class selectApp():
         if my_button != None:
           print my_button
           if my_button[2]=="P":
-            if (my_button[0] == 0) and (my_button[1] == 0):
-              return "Chess"
+            #if (my_button[0] == 0) and (my_button[1] == 0):
+            #  return "Chess"
             if (my_button[1] == 1) or (my_button[1] == 2):
               return "ms"
             #elif (my_button[1] == 3) or (my_button[1] == 4):
