@@ -40,4 +40,6 @@ class glennSelectApp():
             if (my_button[1] == 7):
               if (my_button[0] == 6) or (my_button[0] == 7):
                 return "splash"
+            elif (my_button[0] == 1 and my_button[1] == 2):
+              return "bright"
         time.sleep(0.1)
