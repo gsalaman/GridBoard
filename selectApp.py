@@ -19,7 +19,7 @@ class selectApp():
         self.total_rows = total_rows
         self.total_columns = total_columns
 
-        self.image = Image.open("converted-gifs/Top/GameMenu/gamemenu.gif04.gif").convert("RGB")
+        self.image = Image.open("converted-gifs/Top/GameMenu/menu_v2.jpg").convert("RGB")
 
     ###############################################
     # run()
@@ -35,15 +35,13 @@ class selectApp():
         if my_button != None:
           print my_button
           if my_button[2]=="P":
-            if (my_button[0] == 0) and (my_button[1] == 0):
-              return "bright"
-            if (my_button[1] == 1) or (my_button[1] == 2):
+            if (my_button[1] == 2):
               return "ms"
             #elif (my_button[1] == 3) or (my_button[1] == 4):
             #  return "c4"
-            elif (my_button[1] == 6) or (my_button[1] == 5):
+            elif (my_button[1] == 4):
               return "ttt"
-            elif (my_button[0] == 7) and (my_button[1] == 7):
+            elif (my_button[1] == 5):
               return "glennSelect"
             else:
               return "splash"
