@@ -10,6 +10,7 @@ from ee import ee
 from msApp import msApp
 from Chess.ChessFuntions import Chessgame
 from brightApp import brightApp
+from glennSelectApp import glennSelectApp
 
 ##RGB Matrix Standards
 # Size of one panel
@@ -43,6 +44,7 @@ ee = ee(matrix, total_rows, total_columns)
 ms = msApp(matrix, total_rows, total_columns)
 Chess = Chessgame(matrix, total_rows, total_columns)
 bright = brightApp(matrix, total_rows, total_columns)
+glennSelect = glennSelectApp(matrix, total_rows, total_columns)
 
 apps = {
   "splash": splash,
@@ -51,7 +53,8 @@ apps = {
   "ee": ee,
   "ms": ms,
   "Chess": Chess,
-  "bright": bright
+  "bright": bright,
+  "glennSelect": glennSelect
 }
 
 currentApp = splash 

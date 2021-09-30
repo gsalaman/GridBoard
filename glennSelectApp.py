@@ -1,4 +1,5 @@
 ##############################################
+# UPDATE ME!!!!!
 # selectApp
 #
 # In this iteration, we display the full menu (no animation) and wait for a 
@@ -13,13 +14,14 @@ from get_buttons import read
 from datetime import datetime
 import time
 
-class selectApp():
+class glennSelectApp():
     def __init__(self,rgbmatrix,total_rows,total_columns):
         self.rgbmatrix = rgbmatrix
         self.total_rows = total_rows
         self.total_columns = total_columns
 
-        self.image = Image.open("converted-gifs/Top/GameMenu/gamemenu.gif04.gif").convert("RGB")
+        self.image = Image.open("glenn_app_v1.png").convert("RGB")
+        self.image = self.image.resize((total_rows+1, total_columns))
 
     ###############################################
     # run()
@@ -35,16 +37,9 @@ class selectApp():
         if my_button != None:
           print my_button
           if my_button[2]=="P":
-            if (my_button[0] == 0) and (my_button[1] == 0):
+            if (my_button[1] == 7):
+              if (my_button[0] == 6) or (my_button[0] == 7):
+                return "splash"
+            elif (my_button[0] == 1 and my_button[1] == 2):
               return "bright"
-            if (my_button[1] == 1) or (my_button[1] == 2):
-              return "ms"
-            #elif (my_button[1] == 3) or (my_button[1] == 4):
-            #  return "c4"
-            elif (my_button[1] == 6) or (my_button[1] == 5):
-              return "ttt"
-            elif (my_button[0] == 7) and (my_button[1] == 7):
-              return "glennSelect"
-            else:
-              return "splash"
         time.sleep(0.1)
